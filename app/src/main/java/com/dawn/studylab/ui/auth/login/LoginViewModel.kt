@@ -7,6 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dawn.studylab.navigation.NavScreen
 import com.dawn.studylab.service.NavService
 import com.dawn.studylab.service.SnackbarService
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,6 +34,7 @@ class LoginViewModel @Inject constructor(
         }else if(form.password.isEmpty()||form.password.length<=4){
             isValid = false
         }
+        _isFormValid.value = isValid
     }
 
     fun onEvent(event: LoginUiEvent) {
@@ -56,6 +58,7 @@ class LoginViewModel @Inject constructor(
                     }
                 }
             }
+            LoginUiEvent.SignUpPressed -> navService.navigate(NavScreen.Signup)
         }
     }
 }
@@ -69,4 +72,5 @@ sealed class LoginUiEvent {
     data class UsernameChanged(val username: String) : LoginUiEvent()
     data class PasswordChanged(val password: String) : LoginUiEvent()
     object LoginPressed : LoginUiEvent()
+    object SignUpPressed : LoginUiEvent()
 }

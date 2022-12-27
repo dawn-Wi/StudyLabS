@@ -12,5 +12,10 @@ sealed class NavScreen(
         displayName = "로그인",
         shouldShowNavBars = false
     )
+    object Signup : NavScreen(
+        route = "signup_screen",
+        displayName = "회원가입",
+        shouldShowNavBars = false
+    )
 
 }

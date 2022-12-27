@@ -7,6 +7,7 @@ import com.dawn.studylab.navigation.AUTH_NAV_GRAPH_ROUTE
 import com.dawn.studylab.navigation.NavGraph
 import com.dawn.studylab.navigation.NavScreen
 import com.dawn.studylab.ui.auth.login.LoginScreen
+import com.dawn.studylab.ui.auth.signup.SignupScreen
 
 fun NavGraphBuilder.authNavGraph(){
     navigation(
@@ -15,6 +16,9 @@ fun NavGraphBuilder.authNavGraph(){
     ){
         composable(route = NavScreen.Login.route){
             LoginScreen()
+        }
+        composable(route = NavScreen.Signup.route){
+            SignupScreen()
         }
     }
 }

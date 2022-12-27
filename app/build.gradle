@@ -1,12 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
 }
 
 android {
-    namespace 'com.dawn.studylab'
     compileSdk 33
 
     defaultConfig {
@@ -28,15 +28,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        compose true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-    buildFeatures {
-        compose true
     }
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
@@ -70,9 +70,9 @@ dependencies {
     implementation"androidx.navigation:navigation-compose"
 
     //Firebase
-//    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.4.1'
 //    implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
-//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
 
     //Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
