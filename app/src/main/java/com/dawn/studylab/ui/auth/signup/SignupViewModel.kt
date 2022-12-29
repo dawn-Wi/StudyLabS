@@ -1,5 +1,6 @@
 package com.dawn.studylab.ui.auth.signup
 
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dawn.studylab.model.User
 import com.dawn.studylab.navigation.NavScreen
+import com.dawn.studylab.repository.UserRepository
 import com.dawn.studylab.service.NavService
 import com.dawn.studylab.service.SnackbarService
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignupViewModel @Inject constructor(
+    private val userRepository: UserRepository,
     private val snackbarService: SnackbarService,
     private val navService: NavService
 ) : ViewModel() {
@@ -78,17 +81,25 @@ class SignupViewModel @Inject constructor(
                 viewModelScope.launch {
                     val form by _formState
                     val user = User(
-                        id = "",
-                        username = form.username,
+                        id = form.username,
                         password = form.password1,
-                        displayName = form.displayName,
+                        name = form.displayName,
                         phoneNumber = form.phoneNumber,
+                        checkIn = "false"
+
                     )
+                    userRepository.trySignup(user).getOrElse { exception ->
+                        exception.message?.let {
+                            snackbarService.showSnackbar(it, SnackbarDuration.Short)
+                            return@launch
+                        }
+                    }
                     snackbarService.showSnackbar("Successfully Signed up!")
                     navService.navigate(NavScreen.Login)
                 }
             }
         }
+        checkIfFormIsValid()
     }
 }
 

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.DialogNavigator
+import com.dawn.studylab.repository.UserRepository
 import com.dawn.studylab.service.NavService
 import com.dawn.studylab.service.SnackbarService
 import dagger.Module
@@ -16,6 +17,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+    @Singleton
+    @Provides
+    fun provideUserRepository() = UserRepository()
+
     @Singleton
     @Provides
     fun provideNavController(@ApplicationContext context: Context) = NavHostController(context).apply {

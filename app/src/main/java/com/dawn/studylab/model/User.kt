@@ -1,12 +1,10 @@
 package com.dawn.studylab.model
 
-import com.google.firebase.firestore.Exclude
-
 data class User(
-    @get:Exclude val id: String = "",
-    val username: String = "",
+    val id: String = "",
     val password: String = "",
-    val displayName: String = "",
+    val name: String = "",
     val phoneNumber: String = "",
+    val checkIn: String = "false"
 )
 

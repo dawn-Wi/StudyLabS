@@ -22,6 +22,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dawn.studylab.R
 import com.dawn.studylab.ui.comp.PasswordInputField
@@ -36,6 +37,7 @@ fun LoginScreen(
     val formState by viewModel.formState
     val username = formState.username
     val password = formState.password
+    val isFormValid by viewModel.isFormValid
 
     Surface(
         modifier = Modifier
@@ -84,7 +86,8 @@ fun LoginScreen(
                     Text(
                         modifier = Modifier,
                         text = "Email",
-                        color = Color.Gray
+                        color = Color.Gray,
+                        fontSize = 13.sp
                     )
                     TextInputField(
                         modifier = Modifier.fillMaxWidth(),
@@ -101,7 +104,8 @@ fun LoginScreen(
                     Text(
                         modifier = Modifier,
                         text = "Password",
-                        color = Color.Gray
+                        color = Color.Gray,
+                        fontSize = 13.sp
                     )
                     PasswordInputField(
                         modifier = Modifier.fillMaxWidth(),
@@ -124,10 +128,11 @@ fun LoginScreen(
                     modifier = Modifier.weight(1f),
                     onClick = { viewModel.onEvent(LoginUiEvent.LoginPressed) },
                     text = "LOGIN",
+                    enabled = isFormValid
                 )
                 SSButton(
                     modifier = Modifier.weight(1f),
-                    onClick = { /*TODO*/ },
+                    onClick = { viewModel.onEvent(LoginUiEvent.SignUpPressed) },
                     text = "SIGNUP"
                 )
             }

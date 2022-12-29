@@ -31,7 +31,7 @@ class LoginViewModel @Inject constructor(
         var isValid =true
         if(form.username.isEmpty()||!form.username.contains("@")){
             isValid = false
-        }else if(form.password.isEmpty()||form.password.length<=4){
+        }else if(form.password.isEmpty()||form.password.length<4){
             isValid = false
         }
         _isFormValid.value = isValid
